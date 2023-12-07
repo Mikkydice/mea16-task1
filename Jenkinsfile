@@ -21,8 +21,8 @@ pipeline {
             steps {
 
                 sh '''
-                docker build -t mikkydice/flask-jenk .
-                docker build -t mikkydice/nginx-jenk ./nginx
+                docker build -t mikkydice/flask-jenk:latest -t mikkydice/flask-jenk:v${BUILD_NUMBER} .
+                docker build -t mikkydice/nginx-jenk:latest -t mikkydice/nginx-jenk:v${BUILD_NUMBER} ./nginx
                 '''
 
             }
@@ -34,8 +34,10 @@ pipeline {
             steps {
 
                 sh '''
-                docker push mikkydice/flask-jenk
-                docker push mikkydice/nginx-jenk
+                docker push mikkydice/flask-jenk:latest
+                docker push mikkydice/flask-jenk:v${BUILD_NUMBER}
+                docker push mikkydice/nginx-jenk:latest
+                docker push mikkydice/nginx-jenk:v${BUILD_NUMBER}
                 '''
 
             }
