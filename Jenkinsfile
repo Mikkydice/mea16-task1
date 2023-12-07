@@ -46,7 +46,7 @@ pipeline {
             steps {
 
                 sh '''
-                echo "Not needed for nowww"
+                docker system prune -f
                 '''
 
             }
