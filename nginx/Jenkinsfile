@@ -46,7 +46,7 @@ pipeline {
             steps {
 
                 sh '''
-                echo "Not needed for now"
+                echo "Not needed for noww"
                 '''
 
             }
