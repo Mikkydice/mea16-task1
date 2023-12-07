@@ -1,6 +1,7 @@
 pipeline {
     agent any
     stages {
+
         stage('Init') {
             steps {
 
@@ -20,8 +21,21 @@ pipeline {
             steps {
 
                 sh '''
-                docker build -t flask-jenk .
-                docker build -t nginx-jenk ./nginx
+                docker build -t mikkydice/flask-jenk .
+                docker build -t mikkydice/nginx-jenk ./nginx
+                '''
+
+            }
+
+        }
+
+        stage('Push') {
+
+            steps {
+
+                sh '''
+                docker push mikkydice/flask-jenk
+                docker push mikkydice/nginx-jenk
                 '''
 
             }
@@ -33,8 +47,8 @@ pipeline {
             steps {
 
                 sh '''
-                docker run -d --name flask-app --network jenk-network flask-jenk
-                docker run -d -p 80:80 --name nginx --network jenk-network nginx-jenk
+                docker run -d --name flask-app --network jenk-network mikkydice/flask-jenk
+                docker run -d -p 80:80 --name nginx --network jenk-network mikkydice/nginx-jenk
                 '''
 
             }
