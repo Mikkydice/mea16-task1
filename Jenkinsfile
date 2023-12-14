@@ -68,12 +68,12 @@ pipeline {
                 script {
                     if (env.GIT_BRANCH == "origin/main") {
                         sh '''
-                        kubectl apply -n prod -f ./kubernetes
+                        kubectl apply -n prod -f ./Kubernetes
                         kubectl set image deployment/flask-deployment task1=mikkydice/flask-jenk:prod-v${BUILD_NUMBER} -n prod
                         '''
                     } else if (env.GIT_BRANCH == "origin/dev") {
                         sh '''
-                        kubectl apply -n dev -f ./kubernetes
+                        kubectl apply -n dev -f ./Kubernetes
                         kubectl set image deployment/flask-deployment task1=mikkydice/flask-jenk:dev-v${BUILD_NUMBER} -n dev
                         '''
                     } else {
